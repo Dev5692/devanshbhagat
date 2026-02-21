@@ -44,7 +44,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs text-[#999] uppercase tracking-wider">Email</p>
-                  <p className="text-[#1a1a1a]">bhagat.devansh@gmail.com</p>
+                  <p className="text-[#1a1a1a]">firstname.lastname@gmail.com</p>
                 </div>
               </div>
               
@@ -54,7 +54,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs text-[#999] uppercase tracking-wider">Phone</p>
-                  <p className="text-[#1a1a1a]">+1 (925) 499-6823</p>
+                  <p className="text-[#1a1a1a]">+1 (925) 000 0000</p>
                 </div>
               </div>
               
