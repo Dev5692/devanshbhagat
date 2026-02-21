@@ -20,7 +20,7 @@ export default function AboutSection() {
           <div className="relative">
             <div className="aspect-[4/5] bg-[#f5f5f5] rounded-sm overflow-hidden">
               <img
-                src="/Devansh.jpg"
+                src="/photos/Devansh.jpg"
                 alt="Portrait"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
