@@ -10,6 +10,15 @@ export default function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center relative px-6 bg-[#faf9f6]">
       <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+       className="absolute top-24 left-10"
+      >
+       <img src="/logo.png" alt="Devansh Bhagat" className="h-16 w-auto" />
+      </motion.div>
+
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
