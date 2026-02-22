@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 export default function ReviewsSection() {
   const headerRef = useRef(null);
@@ -42,7 +41,7 @@ export default function ReviewsSection() {
   const isLoading = false;
 
   const averageRating = reviews.length > 0
-    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
+    ? reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
     : 0;
 
   const nextReview = () => {
@@ -81,7 +80,7 @@ export default function ReviewsSection() {
                 ))}
               </div>
               <span className="text-[#666] text-sm">
-                {averageRating} ({reviews.length})
+               {averageRating.toFixed(1)} ({reviews.length})
               </span>
             </div>
           )}
@@ -126,14 +125,12 @@ export default function ReviewsSection() {
           </AnimatePresence>
 
           <div className="flex items-center justify-center gap-4 mt-12">
-            <Button
+            <button
               onClick={prevReview}
-              variant="outline"
-              size="icon"
-              className="rounded-full border-[#e5e5e5] hover:border-[#1a1a1a] hover:bg-white"
+              className="rounded-full border border-[#e5e5e5] hover:border-[#1a1a1a] hover:bg-white w-10 h-10 flex items-center justify-center transition-colors"
             >
               <ChevronLeft size={20} strokeWidth={1.5} />
-            </Button>
+            </button>
             
             <div className="flex gap-2">
               {reviews.map((_, index) => (
@@ -147,14 +144,12 @@ export default function ReviewsSection() {
               ))}
             </div>
 
-            <Button
+            <button
               onClick={nextReview}
-              variant="outline"
-              size="icon"
-              className="rounded-full border-[#e5e5e5] hover:border-[#1a1a1a] hover:bg-white"
+              className="rounded-full border border-[#e5e5e5] hover:border-[#1a1a1a] hover:bg-white w-10 h-10 flex items-center justify-center transition-colors"
             >
               <ChevronRight size={20} strokeWidth={1.5} />
-            </Button>
+            </button>
           </div>
         </div>
       </div>

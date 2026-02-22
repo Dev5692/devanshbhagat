@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 export default function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [status, setStatus] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
+    const data = new FormData(e.target);
+
+    const response = await fetch('/', {
+      method: 'POST',
+      body: data,
+    });
+
+    if (response.ok) {
+      setStatus('success');
+      e.target.reset();
+    } else {
+      setStatus('error');
+    }
   };
 
   return (
@@ -44,7 +53,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs text-[#999] uppercase tracking-wider">Email</p>
-                  <p className="text-[#1a1a1a]">firstname.lastname@gmail.com</p>
+                  <p className="text-[#1a1a1a]">bhagat.devansh@gmail.com</p>
                 </div>
               </div>
               
@@ -54,7 +63,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs text-[#999] uppercase tracking-wider">Phone</p>
-                  <p className="text-[#1a1a1a]">+1 (925) 000 0000</p>
+                  <p className="text-[#1a1a1a]">+1 (925) 499 6823</p>
                 </div>
               </div>
               
@@ -75,52 +84,74 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             onSubmit={handleSubmit}
-            className="space-y-6"
+            data-netlify="true"
+            name="contact"
+            className="grid grid-cols-2 gap-6"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Name</label>
-                <Input 
-                  //placeholder="Your name"
-                  className="border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-[#1a1a1a] transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Email</label>
-                <Input 
-                  type="email"
-                  //placeholder="your@email.com"
-                  className="border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-[#1a1a1a] transition-colors"
-                />
-              </div>
-            </div>
-            
+            <input type="hidden" name="form-name" value="contact" />
+
             <div>
-              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Subject</label>
-              <Input 
-                //placeholder="Project inquiry"
-                className="border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-[#1a1a1a] transition-colors"
-              />
-            </div>
-            
-            <div>
-              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Message</label>
-              <Textarea 
-                placeholder="Tell me about your project..."
-                rows={5}
-                className="border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-[#1a1a1a] transition-colors resize-none"
+              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Name</label>
+              <input 
+                name="name"
+                required
+                style={{ outline: 'none', boxShadow: 'none' }}
+                className="w-full border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 transition-colors bg-transparent focus:border-[#1a1a1a]"
               />
             </div>
 
-            <Button 
-              type="submit"
-              className="mt-8 bg-[#1a1a1a] hover:bg-[#333] text-white px-8 py-6 rounded-none text-sm tracking-wider uppercase group"
-            >
-              Send Message
-              <ArrowUpRight size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Button>
-          </motion.form>
-        </motion.div>
+            <div>
+              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Email</label>
+              <input 
+                name="email"
+                type="email"
+                required
+                style={{ outline: 'none', boxShadow: 'none' }}
+                className="w-full border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 transition-colors bg-transparent focus:border-[#1a1a1a]"
+              />
+            </div>
+
+            <div className="col-span-2">
+              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Subject</label>
+              <input 
+                name="subject"
+                required
+                style={{ outline: 'none', boxShadow: 'none' }}
+                className="w-full border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 transition-colors bg-transparent focus:border-[#1a1a1a]"
+              />
+            </div>
+
+            <div className="col-span-2">
+              <label className="text-xs text-[#999] uppercase tracking-wider mb-2 block">Message</label>
+              <textarea 
+                name="message"
+                placeholder="Tell me about your project..."
+                rows={6}
+                required
+                style={{ outline: 'none', boxShadow: 'none' }}
+                className="w-full border-0 border-b border-[#e5e5e5] rounded-none px-0 py-3 transition-colors resize-none bg-transparent focus:border-[#1a1a1a]"
+              />
+            </div>
+
+              {status === 'success' && (
+                <p className="col-span-2 text-green-600 text-sm">Message sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="col-span-2 text-red-500 text-sm">Something went wrong. Please try again.</p>
+              )}
+
+              <div className="col-span-2">
+                <button 
+                  type="submit"
+                  className="border border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white text-[#1a1a1a] px-6 py-2 text-xs tracking-widest uppercase transition-all duration-300 flex items-center gap-2"
+                >
+                  Send Message
+                  <ArrowUpRight size={14} />
+                </button>
+              </div>
+
+            </motion.form>       
+            </motion.div>
       </div>
     </section>
   );
