@@ -15,7 +15,7 @@ export default function HeroSection() {
         transition={{ delay: 0.2, duration: 0.8 }}
        className="absolute top-24 left-10"
       >
-       <img src="/logo.png" alt="Devansh Bhagat" className="h-22 w-auto" />
+       <img src="/logo.png" alt="Devansh Bhagat" className="h-18 w-auto" />
       </motion.div>
 
       <motion.div
