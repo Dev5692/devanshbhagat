@@ -4,7 +4,6 @@ import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Navigation from '@/components/portfolio/Navigation';
 import Footer from '@/components/portfolio/Footer';
-import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
 
 export default function ProjectDetail() {
@@ -18,9 +17,9 @@ export default function ProjectDetail() {
         <Navigation />
         <div className="min-h-screen flex flex-col items-center justify-center px-6">
           <h1 className="text-4xl font-light text-[#1a1a1a] mb-4">Project not found</h1>
-          <Button onClick={() => navigate('/')} className="bg-[#1a1a1a] hover:bg-[#333] text-white">
+          <button onClick={() => navigate('/')} className="bg-[#1a1a1a] hover:bg-[#333] text-white">
             Back to Home
-          </Button>
+          </button>
         </div>
         <Footer />
       </div>
